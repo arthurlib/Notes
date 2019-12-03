@@ -71,6 +71,13 @@ def set_index_about():
     pass
 
 
+def init_dir():
+    """
+    打扫目录
+    """
+    pass
+
+
 def run():
     deploy_path = os.path.join(base_path, deploy)
     if os.path.exists(deploy_path):
@@ -79,7 +86,11 @@ def run():
     all_path = get_all_file_path(base_path)
     gen_file(all_path)
 
+def main():
+    init_dir()
+    pass
 
 if __name__ == "__main__":
-    run()
+    # run()
+    main()
     print(__file__)
