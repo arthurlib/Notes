@@ -67,6 +67,10 @@ categories:
             f.write(content)
 
 
+def set_index_about():
+    pass
+
+
 def run():
     deploy_path = os.path.join(base_path, deploy)
     if os.path.exists(deploy_path):
