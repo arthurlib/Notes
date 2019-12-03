@@ -1,0 +1,9 @@
+.idea
+.vscode
+build
+_build
+
+deploy
+.deploy
+dev
+*.pyc
