@@ -4,7 +4,12 @@ import sys
 import time
 
 base_path = os.path.dirname(os.path.realpath(sys.argv[0]))
-deploy = ".deploy"
+build_dir = "_build"
+build_path = os.path.join(base_path, build_dir)
+dst_dir = "_build/source"
+source_path = os.path.join(base_path, dst_dir)
+bolg_dir = "_build/source/_post"
+bolg_path = os.path.join(base_path, bolg_dir)
 
 
 def get_all_file_path(path):
@@ -13,12 +18,13 @@ def get_all_file_path(path):
 
     all_file_path = []
     for info in os.walk(path):
-        for file_name in info[2]:
-            if not file_name.startswith(".") and \
-                    file_name.endswith(".md") and \
-                    file_name not in remove_list:
-                all_file_path.append(os.path.join(info[0], file_name))
-                # print(os.path.join(info[0], file_name))
+        if "static" not in info[0]:
+            for file_name in info[2]:
+                if not file_name.startswith(".") and \
+                        file_name.endswith(".md") and \
+                        file_name not in remove_list:
+                    all_file_path.append(os.path.join(info[0], file_name))
+                    # print(os.path.join(info[0], file_name))
     return all_file_path
 
 
@@ -59,7 +65,7 @@ categories:
         )
         # print(path)
 
-        dst_path = file_path.replace(current_dir, current_dir + '/' + deploy)
+        dst_path = file_path.replace(current_dir, current_dir + '/' + bolg_dir)
         # print(dst_path)
         if not os.path.exists(dst_path):
             os.makedirs(dst_path)
@@ -67,28 +73,56 @@ categories:
             f.write(content)
 
 
-def set_index_about():
-    pass
+def gen_static():
+    shutil.copytree(os.path.join(base_path, "static/source/about"), os.path.join(source_path, "about"))
+    shutil.copy2(os.path.join(base_path, "static/source/CNAME"), os.path.join(source_path, "CNAME"))
+
+    shutil.copytree(os.path.join(base_path, "static/themes"), os.path.join(build_path, "themes"))
+    shutil.copy2(os.path.join(base_path, "static/_config.yml"), os.path.join(build_path, "_config.yml"))
 
 
 def init_dir():
     """
     打扫目录
     """
-    pass
+    if os.path.exists(build_path):
+        shutil.rmtree(build_path)
+    os.makedirs(build_path)
 
 
-def run():
-    deploy_path = os.path.join(base_path, deploy)
-    if os.path.exists(deploy_path):
-        shutil.rmtree(deploy_path)
+def move_file():
+    mv_dst_path = os.path.join(base_path, "../source")
+    if os.path.exists(mv_dst_path):
+        shutil.rmtree(mv_dst_path)
 
-    all_path = get_all_file_path(base_path)
-    gen_file(all_path)
+    shutil.move(source_path, mv_dst_path)
+
+    mv_theme_indexs_path = os.path.join(base_path, "../themes/3-hexo/layout/indexs.md")
+    if os.path.exists(mv_theme_indexs_path):
+        os.remove(mv_theme_indexs_path)
+    shutil.copy2(os.path.join(build_path, "themes/3-hexo/layout/indexs.md"), mv_theme_indexs_path)
+
+    mv_theme_config_path = os.path.join(base_path, "../themes/3-hexo/_config.yml")
+    if os.path.exists(mv_theme_config_path):
+        os.remove(mv_theme_config_path)
+    shutil.copy2(os.path.join(build_path, "themes/3-hexo/_config.yml"), mv_theme_config_path)
+
+    mv_hexo_config_path = os.path.join(base_path, "../_config.yml")
+    if os.path.exists(mv_hexo_config_path):
+        os.remove(mv_hexo_config_path)
+    shutil.copy2(os.path.join(build_path, "_config.yml"), mv_hexo_config_path)
+
+    shutil.rmtree(build_path)
+
 
 def main():
     init_dir()
+    all_path = get_all_file_path(base_path)
+    gen_file(all_path)
+    gen_static()
+    move_file()
     pass
+
 
 if __name__ == "__main__":
     # run()
