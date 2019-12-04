@@ -1,3 +1,4 @@
+```
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -45,3 +46,4 @@ def main(src, dst):
 
 if __name__ == "__main__":
     main('./tmp', './ss')
+```
