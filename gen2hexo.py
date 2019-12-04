@@ -8,7 +8,7 @@ build_dir = "_build"
 build_path = os.path.join(base_path, build_dir)
 dst_dir = "_build/source"
 source_path = os.path.join(base_path, dst_dir)
-bolg_dir = "_build/source/_post"
+bolg_dir = "_build/source/_posts"
 bolg_path = os.path.join(base_path, bolg_dir)
 
 
