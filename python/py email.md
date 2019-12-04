@@ -41,6 +41,9 @@ class MailUtil(object):
 
         self.send(receivers, message)
 
+    def quit(self):
+        self.server.quit()
+
 
 if __name__ == "__main__":
     a = MailUtil('smtp.163.com', 'test@163.com', 'passwd')
