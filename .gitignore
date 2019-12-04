@@ -2,8 +2,14 @@
 .vscode
 build
 _build
+__build
 
 deploy
 .deploy
 dev
+test
+cache
+__cache__
+__pycache__
+
 *.pyc
