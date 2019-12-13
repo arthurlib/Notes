@@ -38,6 +38,10 @@ cargo build --release: 正式发布
 
 
 
+语法
+
+let x = 5; 定义不可变变量
+let mut y = 0; 定义可变变量
 
 
 

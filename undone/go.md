@@ -3,21 +3,33 @@
 
 go build 编译自身包和依赖包
 go install 编译并安装自身包和依赖包
+你可以通过如下命令安装：
+go install codesite.ext/author/goExample/goex
+包安装到本地它会从远端仓库下载包：检出、编译和安装一气呵成
+
+go get github.com/NNNN/uc。 下载包
+
 
 gofmt 格式化代码
 在命令行输入 gofmt –w program.go 会格式化该源文件的代码然后将格式化后的代码覆盖原始内容（如果不加参数 -w 则只会打印格式化后的结果而不重写文件）；gofmt -w *.go 会格式化并重写所有 Go 源文件；gofmt map1 会格式化并重写 map1 目录及其子目录下的所有 Go 源文件。
 
 
 生成代码文档 godoc使用 go doc args
+godoc -http=:6060
 
 
 go fix 用于将你的 Go 代码从旧的发行版迁移到最新的发行版，它主要负责简单的、重复的、枯燥无味的修改工作，如果像 API 等复杂的函数修改，工具则会给出文件名和代码行数的提示以便让开发人员快速定位并升级代码
 go test 是一个轻量级的单元测试框架
 
 
+反引号
+`
+原始字符串
+`
 
+    
 
-####环境变量设置
+#### 环境变量设置
 
 ```
 # 安装目录
@@ -37,7 +49,7 @@ export PATH=$PATH:${GOPATH//://bin:}/bin
 //加载GOPATH/src/shorturl/model模块
 
 
-1. 点操作: import( . “fmt” )
+1. 点操作: import( . “fmt” ) 可以不通过包名来使用其中的项目
 2. 别名操作: import( f “fmt” )
 3. _操作 import(_“github.com/ziutek/mymysql/godrv” )
 > _操作其实只是引入该包。当导入一个包时，它所有的init()函数就会被执行，  
@@ -115,5 +127,25 @@ git clone https://github.com/golang/text.git
 go get github.com/golang/text后将包移到x目录
 
 ```
+
+
+#### init 函数
+
+变量除了可以在全局声明中初始化，也可以在 init 函数中初始化。这是一类非常特殊的函数，它不能够被人为调用，而是在每个包完成初始化后自动执行，并且执行优先级比 main 函数高。
+
+
+#### 字符串拼接
+在循环中使用加号 + 拼接字符串并不是最高效的做法，更好的办法是使用函数 strings.Join()（第 4.7.10 节），有没有更好地办法了？有！使用字节缓冲（bytes.Buffer）拼接更加给力
+
+
+#### 定时任务
+如果你需要在应用程序在经过一定时间或周期执行某项任务（事件处理的特例），则可以使用 time.After 或者 time.Ticker：我们将会在第 14.5 节讨论这些有趣的事情。 另外，time.Sleep（Duration d） 可以实现对某个进程（实质上是 goroutine）时长为 d 的暂停
+
+
+
+
+
+
+
 
 
