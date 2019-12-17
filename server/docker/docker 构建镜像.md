@@ -8,7 +8,7 @@
 
 1. 先对已经运行的(存在)容器进行一些修改，例如 apt update，更新一下软件包
 
-```
+```shell
 docker run -i -t ubuntu:14.04 /bin/bash
 apt update && apt install -y vim
 # 重新进入容器
@@ -19,7 +19,7 @@ apt update && apt install -y vim
 
 2. commit命令用来将容器转化为镜像，运行下面的命令，我们可以讲刚刚的容器转换为镜像:
 
-```
+```shell
 # docker commit 的语法格式为：
 # docker commit [选项] <容器ID或容器名> [<仓库名>[:<标签>]]
 
@@ -57,7 +57,8 @@ RUN buildDeps='gcc libc6-dev make wget' \
 
 
 2. 编写Dockerfile文件
-```
+
+```shell
 # filename: Dockerfile
 FROM ubuntu:14.04
 MAINTAINER zhuzhenyuan<zhenyuanzhu@outlook.com>
@@ -82,7 +83,8 @@ docker 容器默认会把容器内部第一个进程，也就是pid=1的程序�
 
 
 3. 构建
-```
+
+```shell
 # 指令
 docker build [选项] <上下文路径/URL/->
 
@@ -117,10 +119,12 @@ COPY ./package.json /app/
 
 一般习惯性的会使用默认的文件名 Dockerfile，以及会将其置于镜像构建上下文目录中
 ```
+
 > 上面代码中,-t参数用来指定image文件的名字,后面还可以用冒号指定标签,如果不指定,默认标签就是latest,最后那个.表示Dockerfile文件所在的路径.这个例子Dockerfile文件在当前路径,所以就是一个.
 
 生成容器
-```
+
+```shell
 # 上面的例子运行
 docker run -p 8000:80 -d zhuzhenyuan/ubuntu:test.0.0.2
 
@@ -134,13 +138,14 @@ docker container run -p 8000:80 -it zhuzhenyuan/ubuntu:test.0.0.2 /bin/bash
 发布image文件  
 首先，去 hub.docker.com 或 cloud.docker.com注册一个账户。然后，用下面的命令登录
 
-```
+```shell
 docker login
 docker logout # 退出登录
 ```
 
 接着，为本地的 image 标注用户名和版本。
-```
+
+```shell
 # 设置镜像标签
 docker tag [imageName] [username]/[repository]:[tag]
 docker image tag [imageName] [username]/[repository]:[tag]
@@ -151,13 +156,15 @@ docker image tag koa-demos:0.0.1 ruanyf/koa-demos:0.0.1
 ```
 
 也可以不标注用户名，重新构建一下 image 文件。重新构建
-```
+
+```shell
 $ docker image build -t [username]/[repository]:[tag] .
 ```
 
 
 最后，发布 image 文件。
-```
+
+```shell
 # docker push
 docker image push [username]/[repository]:[tag]
 ```
@@ -169,7 +176,7 @@ docker image push [username]/[repository]:[tag]
 
 docker build 还支持从 URL 构建，比如可以直接从 Git repo 中构建：
 
-```
+```shell
 docker build https://github.com/twang2218/gitlab-ce-zh.git#:11.1
 # 这行命令指定了构建所需的 Git repo，并且指定默认的 master 分支，构建目录为 /11.1/，
 # 然后 Docker 就会自己去 git clone 这个项目、切换到指定分支、并进入到指定目录后开始构建。
@@ -177,7 +184,7 @@ docker build https://github.com/twang2218/gitlab-ce-zh.git#:11.1
 
 > 用给定的 tar 压缩包构建
 
-```
+```shell
 docker build http://server/context.tar.gz
 # 如果所给出的 URL 不是个 Git repo，而是个 tar 压缩包，
 # 那么 Docker 引擎会下载这个包，并自动解压缩，以其作为上下文，开始构建。
@@ -185,7 +192,7 @@ docker build http://server/context.tar.gz
 
 > 从标准输入中读取 Dockerfile 进行构建
 
-```
+```shell
 docker build - < Dockerfile
 或
 cat Dockerfile | docker build -
@@ -197,7 +204,7 @@ cat Dockerfile | docker build -
 
 > 从标准输入中读取上下文压缩包进行构建
 
-```
+```shell
 docker build - < context.tar.gz
 # 如果发现标准输入的文件格式是 gzip、bzip2 以及 xz 的话，
 # 将会使其为上下文压缩包，直接将其展开，将里面视为上下文，并开始构建。
@@ -207,7 +214,7 @@ docker build - < context.tar.gz
 
 > 从 rootfs 压缩包导入
 
-```
+```shell
 格式：docker import [选项] <文件>|<URL>|- [<仓库名>[:<标签>]]
 
 # 压缩包可以是本地文件、远程 Web 文件，甚至是从标准输入中得到。
@@ -222,7 +229,7 @@ docker import \
 
 > docker save 和 docker load
 
-```
+```shell
 Docker 还提供了 docker save 和 docker load 命令，用以将镜像保存为一个文件，然后传输到另一个位置上，再加载进来。
 这是在没有 Docker Registry 时的做法，
 现在已经不推荐，镜像迁移应该直接使用 Docker Registry，
@@ -249,7 +256,7 @@ docker load -i alpine-latest.tar.gz
 
 #### 导出和导入容器
 
-```
+```shell
 导出容器
 docker export 7691a814370e > ubuntu.tar
 这样将导出容器快照到本地文件。

@@ -142,9 +142,19 @@ go get github.com/golang/text后将包移到x目录
 如果你需要在应用程序在经过一定时间或周期执行某项任务（事件处理的特例），则可以使用 time.After 或者 time.Ticker：我们将会在第 14.5 节讨论这些有趣的事情。 另外，time.Sleep（Duration d） 可以实现对某个进程（实质上是 goroutine）时长为 d 的暂停
 
 
+#### 静态编译
 
+```
+GOOS=linux CGO_ENABLED=0 go build -ldflags="-s -w" -o app app.go
 
+你可能有人还使用-a参数，它强制重新编译相关的包,一般你不会使用它。
 
+-s 忽略符号表和调试信息，-w忽略DWARF符号表，通过这两个参数，可以进一步减少编译的程序的尺寸，更多的参数可以参考go link, 或者 go tool link -help(另一个有用的命令是go tool compile -help)。
+
+你也可以使用strip工具对编译的Go程序进行裁剪。
+
+本身Go是静态编译的， 对于CGO, 如果设置CGO_ENABLED=0,则完全静态编译，不会再依赖动态库
+```
 
 
 

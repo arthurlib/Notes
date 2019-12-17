@@ -35,8 +35,8 @@ cargo build: 编译，debug
 cargo run: 编译运行
 cargo check: 检查是否能成功编译
 cargo build --release: 正式发布
-
-
+cargo new movie-lib --lib: 创建lib项目，库工程crate
+cargo new movie-lib-test --bin
 
 语法
 
