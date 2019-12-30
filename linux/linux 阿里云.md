@@ -1,4 +1,14 @@
-1、卸载阿里云盾（安骑士）
+* 阿里云ECS服务器 git clone 速度慢
+
+解决方案
+```bash
+vim /etc/ssh/ssh_config
+
+# 编辑 /etc/ssh/ssh_config，找到 GSSAPIAuthentication no 这行，删掉前面的注释，然后保存退出
+```
+
+
+* 卸载阿里云盾（安骑士）
 
 卸载方法很简单，执行下面三段命令即可：
 

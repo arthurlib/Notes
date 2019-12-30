@@ -44,8 +44,20 @@ let x = 5; 定义不可变变量
 let mut y = 0; 定义可变变量
 
 
+换源：为rust crates.io换上国内中科大的源
+中科大说明： [https://lug.ustc.edu.cn/wiki/mirrors/help/rust-crates](https://lug.ustc.edu.cn/wiki/mirrors/help/rust-crates)
 
+1. 进入当前用户的 .cargo 目录 cd ~/.cargo
+2. 新建名字叫 config 的文件
+3. 编辑 config 文件写入
 
+```bash
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+replace-with = 'ustc'
+[source.ustc]
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+```
 
 
 
