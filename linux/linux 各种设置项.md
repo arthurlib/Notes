@@ -49,6 +49,32 @@ no_proxy
 export no_proxy="*.aiezu.com,10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1"
 ```
 
+设置ALL_PROXY
+
+> 全部生效
+
+```bash
+export ALL_PROXY=socks5://127.0.0.1:1080
+```
+
+
+改相应工具的配置，比如apt的配置
+
+```bash
+sudo vim /etc/apt/apt.conf
+在文件末尾加入下面这行
+Acquire::http::Proxy "http://proxyAddress:port"
+```
+
+如果说经常使用git对于其他方面都不是经常使用，可以直接配置git的命令。
+
+```bash
+# 使用ss/ssr来加快git的速度
+# 直接输入这个命令就好了
+git config --global http.proxy 'socks5://127.0.0.1:1080' 
+git config --global https.proxy 'socks5://127.0.0.1:1080'
+```
+
 gsettings
 
 > 可用于桌面版linux修改代理配置
@@ -60,3 +86,8 @@ gsettings
 DConf 数据库。在 Ubuntu 中更改 DConf 数据库有基于图像用户界面和非图形用户界面的两种方式。  
 系统设置或者 dconf-editor 是访问 DConf 数据库的图形方法，  
 而 gsettings 或 dconf 就是能更改数据库的命令行工具。
+
+
+mac 设置代理工具
+
+> networksetup

@@ -1,3 +1,7 @@
+参考: 
+[https://www.jianshu.com/p/abfb47d36fba](https://www.jianshu.com/p/abfb47d36fba)
+[https://www.jianshu.com/p/de6b292f005d](https://www.jianshu.com/p/de6b292f005d)
+
 select，poll，epoll都是IO多路复用的机制，这里记录select
 
 ```python
