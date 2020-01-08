@@ -157,5 +157,5 @@ GOOS=linux CGO_ENABLED=0 go build -ldflags="-s -w" -o app app.go
 ```
 
 
-
-
+golang一个包多个main函数-怎样忽略部分go文件  
+// +build ignore要在package定义之前加上并且后面至少一个空行

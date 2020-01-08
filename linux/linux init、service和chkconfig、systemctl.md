@@ -1,3 +1,7 @@
+[[Linux]systemd和sysV](https://www.cnblogs.com/aaronLinux/p/10654523.html)
+
+[init 维基](https://zh.wikipedia.org/wiki/Init)
+
 ### service
 
 > service命令用于对系统服务进行管理，比如启动（start）、停止（stop）、重启（restart）、重新加载配置（reload）、查看状态（status）等。
@@ -10,6 +14,9 @@ service nginx start
 service nginx stop
 service nginx restart 
 ```
+
+[LBS风格](https://www.cnblogs.com/boodoog/p/5844827.html)
+
 ```bash
 # LBS风格示例
 #!/bin/bash  
