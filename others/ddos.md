@@ -28,11 +28,11 @@ def conn_thread():
         s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)  
         try:  
             s.connect((HOST,PORT))  
-            s.send(buf)  
-            print "Send buf OK!,conn=%d\n"%i  
+            s.send(bytes(buf, encoding="utf8"))  
+            print("Send buf OK!,conn=%d\n"%i)
             socks.append(s)  
-        except Exception,ex:  
-            print "Could not connect to server or send error:%s"%ex  
+        except Exception as ex:  
+            print("Could not connect to server or send error:%s"%ex)
             time.sleep(10)  
 #end def  
       
@@ -41,10 +41,10 @@ def send_thread():
     while True:  
         for s in socks:  
             try:  
-                s.send("f")  
+                s.send(b"f")  
                 #print "send OK!"  
-            except Exception,ex:  
-                print "Send Exception:%s\n"%ex  
+            except Exception as ex:  
+                print("Send Exception:%s\n"%ex)
                 socks.remove(s)  
                 s.close()  
         time.sleep(1)  

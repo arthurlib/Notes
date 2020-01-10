@@ -2,7 +2,8 @@
 
 github: https://github.com/pyenv/pyenv#installation
 
-use: http://einverne.github.io/post/2017/04/pyenv.html
+use: http://einverne.github.io/post/2017/04/pyenv.html  
+https://www.jianshu.com/p/af1f8d7b6b31
 
 
 #### 2 ubuntu安装py3.7
