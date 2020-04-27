@@ -6,7 +6,7 @@
 
 ```
 tmux [new -s 会话名 -n 窗口名]  #启动新会话
-tmux at [-t 会话名]  #恢复会话
+tmux at [-t 会话名/编号]  #恢复会话
 tmux ls  #列出所有会话
 tmux kill-session -t 会话名  #关闭会话
 tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1  #关闭所有会话
@@ -23,7 +23,7 @@ ctrl+b,s    # 列出所有会话
 ctrl+b,$    # 重命名当前会话
 ctrl+b,d   #退出 tmux（tmux 仍在后台运行）
 ctrl+b,t   #窗口中央显示一个数字时钟
-ctrl+b,?   #列出所有快捷键
+ctrl+b,?   #列出所有快捷键，可以多看
 ctrl+b,:   #命令提示符
 ```
 
@@ -55,22 +55,16 @@ ctrl+b,%  #  垂直分割
 ctrl+b,"  #  水平分割
 ctrl+b,o  #  交换窗格
 ctrl+b,x  #  关闭窗格
+Ctrl+b <arrow key>  # 光标切换到其他窗格。方向键
+Ctrl+b ;  # 光标切换到上一个窗格。
+Ctrl+b o  # 光标切换到下一个窗格
 ctrl+b,⍽  #  左边这个符号代表空格键 - 切换布局
 ctrl+b,q  # 显示每个窗格是第几个，当数字出现的时候按数字几就选中第几个窗格
 ctrl+b,{  # 与上一个窗格交换位置
 ctrl+b,}  # 与下一个窗格交换位置
 ctrl+b,z  # 切换窗格最大化/最小化
+Ctrl+b Ctrl+<arrow key>  # 按箭头方向调整窗格大小
 
-# 同步窗格
-:setw synchronize-panes
-
-# 调整窗格尺寸，PREFIX == ctrl+b
-PREFIX : resize-pane -D          #当前窗格向下扩大 1 格
-PREFIX : resize-pane -U          #当前窗格向上扩大 1 格
-PREFIX : resize-pane -L          #当前窗格向左扩大 1 格
-PREFIX : resize-pane -R          #当前窗格向右扩大 1 格
-PREFIX : resize-pane -D 20       #当前窗格向下扩大 20 格
-PREFIX : resize-pane -t 2 -L 20  #编号为 2 的窗格向左扩大 20 格
 ```
 
 > 文本复制模式
