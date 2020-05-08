@@ -17,11 +17,16 @@ ServerAliveInterval 60
 > 如果有相应的权限，也可以在服务器端设置，即编辑/etc/ssh/sshd_config，并添加：
 
 ```
-ClientAliveInterval 60
+TCPKeepAlive yes # 必须打开,表示TCP保持连接不断开
+ClientAliveInterval 60  # ClientAliveInterval设置的值要小于各层防火墙的最小值，不然，也就没用了。）
 ```
 
 > 重启SSH服务器后该项设置会生效。每一个连接到此服务器上的客户端都会受其影响。应注意启用该功能后，安全性会有一定下降（比如忘记登出时...）
 
+重启
+```shell script
+sudo /etc/init.d/ssh restart
+```
 
 重用
 
